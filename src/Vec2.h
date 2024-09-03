@@ -50,4 +50,4 @@ namespace PixL
     };
 
 }
-std::ostream& operator<<( std::ostream& stream, PixL::Vec2& vector );
+std::ostream& operator<<( std::ostream& stream, const PixL::Vec2& vector );

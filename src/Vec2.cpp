@@ -133,7 +133,7 @@ bool PixL::Vec2::operator!=( const Vec2& rhs )
     return !( x == rhs.x && y == rhs.y );
 }
 
-std::ostream& operator<<( std::ostream& stream, PixL::Vec2& vector )
+std::ostream& operator<<( std::ostream& stream, const PixL::Vec2& vector )
 {
     stream << "( " << vector.x << ", " << vector.y << " )";
     return stream;
