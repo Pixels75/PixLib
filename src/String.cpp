@@ -57,7 +57,7 @@ size_t PixL::String::GetLength() const
     return m_len;
 }
 
-char PixL::String::operator[]( size_t index ) const
+char PixL::String::operator[]( const size_t index ) const
 {
     if ( index >= m_len ) return 0;
     return m_str[ index ];
