@@ -14,10 +14,12 @@ namespace PixL
         static Vector2D Up();
 
         // Static Utility Methods
-        static float Distance(const Vector2D& v1, const Vector2D& v2 );
+        static float Distance( const Vector2D& v1, const Vector2D& v2 );
     public:
         float x, y;
 
+        // Constructor
+        Vector2D();
         Vector2D( float x, float y );
 
         // Vector Operation Methods
@@ -25,7 +27,7 @@ namespace PixL
         float SqrMagnitude() const;
         float Magnitude() const;
 
-        //---------- Operation Overloads ----------
+        //---------- Operator Overloads ----------
         // Unary Arithmetic
         Vector2D operator+() const;
         Vector2D operator-() const;

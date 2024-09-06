@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include "String.h"
+#include "Vector2D.h"
 
 enum LogLevel { Nothing = 0, Error, Warning, Message };
 
@@ -16,21 +18,21 @@ namespace PixL
         static void LogMsg( const T& message )
         {
             if ( logLevel < Message ) return;
-            std::cout << "(m) - " << message << '\n';
+            std::cout << "[MSG] - " << message << '\n';
         }
 
         template<typename T>
         static void LogWarn( const T& warning )
         {
             if ( logLevel < Warning ) return;
-            std::cout << "(w) - " << warning << '\n';
+            std::cout << "[WARN] - " << warning << '\n';
         }
 
         template<typename T>
         static void LogErr( const T& error )
         {
             if ( logLevel < Error ) return;
-            std::cout << "(e) - " << error << '\n';
+            std::cout << "[ERR] - " << error << '\n';
         }
     };
 }

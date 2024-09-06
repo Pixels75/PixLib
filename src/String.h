@@ -8,18 +8,24 @@ namespace PixL
     class String
     {
     public:
-        explicit( false ) String( const char* str );
+        // Constructors
+        explicit String( const char* str );
+        // Copy Constructor/Assignment
         String( const String& str );
+        String& operator=( const String& rhs );
+        String& operator=( const char* rhs );
         ~String();
 
         char* GetCStr() const;
         size_t GetLength() const;
         // Operator Overloads
         char operator[]( size_t index ) const;
-        void operator+=( const String& str );
-        void operator+=( const char* str );
         String operator+( const char* str ) const;
         String operator+( const String& str ) const;
+        void operator+=( const String& str );
+        void operator+=( const char* str );
+        bool operator==( const String& rhs ) const;
+        bool operator!=( const String& rhs ) const;
     private:
         char* m_str;
         size_t m_len;

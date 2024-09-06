@@ -1,7 +1,7 @@
 #include <cstring>
+#include <iostream>
 #include "String.h"
 
-#include <iostream>
 
 PixL::String::String( const char* str )
 {
@@ -19,6 +19,28 @@ PixL::String::String( const String& str )
     strcpy( m_str, str.m_str );
 
     m_str[ m_len ] = '\0';
+}
+
+PixL::String& PixL::String::operator=( const String& rhs )
+{
+    if ( rhs == *this ) return *this;
+    m_len = rhs.m_len;
+    m_str = new char[ m_len + 1 ];
+    strcpy( m_str, rhs.m_str );
+
+    m_str[ m_len ] = '\0';
+    return *this;
+}
+
+PixL::String& PixL::String::operator=( const char* rhs )
+{
+    if ( rhs == m_str ) return *this;
+    m_len = strlen( rhs );
+    m_str = new char[ m_len + 1 ];
+    strcpy( m_str, rhs );
+
+    m_str[ m_len ] = '\0';
+    return *this;
 }
 
 PixL::String::~String()
@@ -56,17 +78,26 @@ void PixL::String::operator+=( const char* str )
 
 PixL::String PixL::String::operator+( const char* str ) const
 {
-    return { strcat( m_str, str ) };
+    return String( { strcat( m_str, str ) } );
 }
 
 PixL::String PixL::String::operator+( const String& str ) const
 {
-    return { strcat( m_str, str.m_str ) };
+    return String( { strcat( m_str, str.m_str ) } );
 }
-
 
 std::ostream& operator<<( std::ostream& stream, const PixL::String& str )
 {
     stream << str.GetCStr();
     return stream;
+}
+
+bool PixL::String::operator==( const String& rhs ) const
+{
+    return ( m_str == rhs.m_str );
+}
+
+bool PixL::String::operator!=(const String& rhs) const
+{
+    return ( m_str != rhs.m_str );
 }

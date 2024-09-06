@@ -26,6 +26,12 @@ float PixL::Vector2D::Distance( const Vector2D& v1, const Vector2D& v2 )
     return ( v1 - v2 ).Magnitude();
 }
 
+PixL::Vector2D::Vector2D()
+    :
+    x( 0 ),
+    y( 0 )
+{}
+
 PixL::Vector2D::Vector2D( float x, float y )
     :
     x( x ),
