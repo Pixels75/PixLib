@@ -1,7 +1,5 @@
 #pragma once
 
-#include <ostream>
-
 namespace PixL
 {
     template<typename T>
@@ -9,19 +7,22 @@ namespace PixL
     {
     public:
         // Constructors
-        explicit List() = default;
+        explicit List()
+        {
+            m_list = new T[ m_capacity ];
+        }
         explicit List( size_t initSize )
         {
-            m_len = initSize;
-            m_list = new T[ m_cap ];
+            m_length = initSize;
+            m_list = new T[ m_capacity ];
         }
         // Copy Constructor/Assignment
         List( List& rhs )
         {
-            m_len = rhs.m_len;
+            m_length = rhs.m_length;
             delete[] m_list;
-            m_list = new T[ m_len ];
-            for ( size_t i = 0; i < m_len; i++ )
+            m_list = new T[ m_length ];
+            for ( size_t i = 0; i < m_length; i++ )
             {
                 m_list[ i ] = rhs.m_list[ i ];
             }
@@ -30,15 +31,29 @@ namespace PixL
         {
             if ( rhs == *this ) return *this;
 
-            m_cap = rhs.m_cap;
-            m_len = rhs.m_len;
+            m_capacity = rhs.m_capacity;
+            m_length = rhs.m_length;
             delete[] m_list;
-            m_list = new T[ m_cap ];
-            for ( size_t i = 0; i < m_cap; i++ )
+            m_list = new T[ m_capacity ];
+            for ( size_t i = 0; i < m_capacity; i++ )
             {
                 m_list[ i ] = rhs.m_list[ i ];
             }
             return *this;
+        }
+        size_t GetLength() const
+        {
+            return m_length;
+        }
+        void RemoveAt( size_t index )
+        {
+            if ( index >= m_length ) return;
+            delete m_list[ index ];
+            for ( size_t i = index; i < m_length - 1; i++ )
+            {
+                m_list[ i ] = std::move( m_list[ i + 1 ] );
+            }
+            m_length--;
         }
         // Operator Overloads
         T& operator[]( size_t index )
@@ -47,25 +62,26 @@ namespace PixL
         }
         List& operator+=( const T& element )
         {
-            m_len++;
-            if ( m_len >= m_cap ) m_cap *= 2;
-            T* newList = new T[ m_cap ];
-            for ( size_t i = 0; i < m_len - 1; i++ )
+            m_length++;
+            if ( m_length < m_capacity )
+            {
+                m_list[ m_length - 1 ] = element;
+                return *this;
+            }
+            m_capacity *= 2;
+            T* newList = new T[ m_capacity ];
+            for ( size_t i = 0; i < m_length - 1; i++ )
             {
                 newList[ i ] = m_list[ i ];
             }
-            for ( size_t i = m_len; i < m_cap; i++ )
-            {
-                newList[ i ] = T();
-            }
-            newList[ m_len - 1 ] = element;
+            newList[ m_length - 1 ] = element;
             delete[] m_list;
             m_list = newList;
             return *this;
         }
     private:
         T* m_list = nullptr;
-        size_t m_len = 0;
-        size_t m_cap = 2;
+        size_t m_length = 0;
+        size_t m_capacity = 2;
     };
 }

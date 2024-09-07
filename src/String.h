@@ -27,8 +27,8 @@ namespace PixL
         bool operator==( const String& rhs ) const;
         bool operator!=( const String& rhs ) const;
     private:
-        char* m_str;
-        size_t m_len;
+        char* m_string;
+        size_t m_length;
     };
 }
 

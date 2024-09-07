@@ -3,7 +3,6 @@
 #include <iostream>
 #include "String.h"
 #include "Vec2.h"
-#include "List.h"
 
 enum LogLevel { Nothing = 0, Error, Warning, Message };
 
@@ -14,7 +13,6 @@ namespace PixL
     public:
         static LogLevel logLevel;
     public:
-
         template<typename T>
         static void LogMsg( const T& message )
         {
