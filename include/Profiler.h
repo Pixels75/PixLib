@@ -3,28 +3,30 @@
 #include <chrono>
 #include "List.h"
 
-namespace PixL
-{
+namespace PixL {
     class Profiler;
     class Timer;
 
-    class Profiler
-    {
+    class Profiler {
     public:
-        static void StartTimer( const char* name );
-        static void EndTimer( const char* name );
+        static void StartTimer( const char *name );
+
+        static void EndTimer( const char *name );
+
     private:
-        static List<Timer*> m_timers;
-        static bool CheckIfNameExists( const char* name );
+        static List<Timer *> m_timers;
+
+        static bool CheckIfNameExists( const char *name );
     };
 
-    class Timer
-    {
+    class Timer {
     public:
-        const char* name;
+        const char *name;
 
-        explicit Timer( const char* name );
+        explicit Timer( const char *name );
+
         ~Timer();
+
     private:
         std::chrono::time_point<std::chrono::high_resolution_clock> m_timerStart;
         std::chrono::time_point<std::chrono::high_resolution_clock> m_timerEnd;
